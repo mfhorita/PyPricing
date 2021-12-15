@@ -2,45 +2,44 @@
 
 #  PyPricing
 #  ----------------------------------------------------------------------
+#   Calcula Preços a Termo:
+#  ----------------------------------------------------------------------
 import math
 
 
-def effective_rate(notional_rate=0.10, n_period=1):
+def forward_equities(spot=100, rate=0.10, n_days=30, base=360):
     """
-        Effective Rate: Returns the annual interest rate
-            notional_rate is the notional interest rate
-            n_period is the number of compounding periods per year
+        Calcula o preço a termo de ações
     """
 
-    return (1 + notional_rate / n_period) ** n_period - 1
+    return spot * (math.exp(1) ** (rate * n_days / base))
 
 
-def nominal_rate(effec_rate=0.1025, n_period=2):
+def pnl_forward_equities(future=110, spot=100, rate=0.10, n_days=30, base=360):
     """
-        Nominal Rate: Returns the annual nominal rate
-            effec_rate is the effective interest rate
-            n_period is the number of compounding periods per year
+        Calcula o P&L do termo de ações
     """
 
-    return n_period * ((1 + effec_rate) ** (1 / n_period) - 1)
+    if spot < 0:
+        return forward_equities(abs(spot), rate, n_days, base) - future
+    else:
+        return future - forward_equities(spot, rate, n_days, base)
 
 
-def continous_rate(effec_rate=0.10, n_period=1):
+def forward_equities_coupon(spot=100, rate=0.10, coupon=40, n_days=30, base=360):
     """
-        Continous Rate: Returns the continous interest rate
-            effec_rate is the effective interest rate
-            n_period is the number of continous compounding periods
-    """
-
-    return math.log(1 + effec_rate / n_period) * n_period
-
-
-def effect_continous_conv(continous_rate=0.10, n_period=1):
-    """
-        Effect Continous Conv: Returns the effective interest rate
-            continous_rate is the continous interest rate
-            n_period is the number of effective compounding periods
+        Calcula o preço a termo de ações
     """
 
-    return (math.exp(1) ** (continous_rate / n_period) - 1) * n_period
+    return (spot - coupon) * (math.exp(1) ** (rate * n_days / base))
 
+
+def pnl_forward_equities_coupon(future=110, spot=100, coupon=40, rate=0.10, n_days=30, base=360):
+    """
+        Calcula o P&L do termo de ações
+    """
+
+    if spot < 0:
+        return forward_equities_coupon(abs(spot), coupon, rate, n_days, base) - future
+    else:
+        return future - forward_equities_coupon(spot, coupon, rate, n_days, base)
