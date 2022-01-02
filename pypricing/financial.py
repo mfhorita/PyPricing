@@ -49,4 +49,3 @@ def effective_vs_continous_rate(continous_rate=0.10, n_period=1):
     """
 
     return (math.exp(1) ** (continous_rate / n_period) - 1) * n_period
-

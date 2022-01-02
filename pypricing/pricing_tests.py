@@ -1,9 +1,14 @@
 # coding=utf-8
 
 import forward as fwd
+import financial as fin
 
 
 def exec_tests():
+
+    # print('Daily (n=365):', round(fin.nominal_vs_effective_rate(0.0054109656, 360), 8))
+    print('Daily (n=365):', round(fin.continous_vs_efective_rate(0.0054109656, 360), 8))
+
     '''
     print('')
     print('Notional Rate -> Effective Rate')
@@ -30,7 +35,6 @@ def exec_tests():
     print('Continous Rate -> Effective Rate')
     print('Annual (n=1):', round(fin.effective_vs_continous_rate(0.09531018, 1) * 100, 6))
     print('Daily (n=365):', round(fin.effective_vs_continous_rate(0.10514064, 365) * 100, 6))
-    '''
 
     print('')
     print('Calcula Preço a Termo - Ação sem Dividendos')
@@ -67,6 +71,7 @@ def exec_tests():
     print(f' - O restante ($900 - ${vp_cupom} = ${vl_spot}) é investido por 12 meses a uma taxa de 10% a.a.')
     print(' - Preço do Termo', round(fwd.forward_prices(vl_spot, 0.10, 360, 360), 2))
     print(' - P&L do Termo', round(fwd.pnl_forward_prices(905 + 40, -vl_spot, 0.10, 360, 360), 2))
+    '''
 
 
 if __name__ == '__main__':
