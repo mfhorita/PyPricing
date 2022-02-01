@@ -24,3 +24,9 @@ Bachlier = Modelo Normal para precificação de Superficie de Volatilidade (1900)
 DtRef 07/10/2021 DtVcto 28/1/2025 (3,31) => 41.2 é a volatilidade Black&Scholes
 => Montar calculadora no Risco de Mercado para Swaptions de Opção Europeia
 => Depois evoluimos o modelo americano
+
+
+003225053888657
+
+
+29632487842
